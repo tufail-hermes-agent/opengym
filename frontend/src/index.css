@@ -18,22 +18,22 @@
 
 /* ---------------------------------------------------------------- tokens -- */
 :root {
-  /* surfaces — dark is the default */
-  --bg:        #000000;
-  --bg-el:     #0e0e10;   /* elevated backdrop (sheets, bars) */
-  --surface:   #1c1c1e;   /* card / grouped-list fill */
-  --surface-2: #2c2c2e;   /* pressed + nested fill */
-  --surface-3: #3a3a3c;   /* controls (segmented track, switch off) */
+  /* surfaces — dark is the default — PRO THEME: deep charcoal w/ blue undertone */
+  --bg:        #0b0f14;
+  --bg-el:     #10151c;   /* elevated backdrop (sheets, bars) */
+  --surface:   #161d26;   /* card / grouped-list fill */
+  --surface-2: #1f2833;   /* pressed + nested fill */
+  --surface-3: #2a3542;   /* controls (segmented track, switch off) */
 
   /* text */
-  --label:     #ffffff;
-  --label-2:   rgba(235,235,245,.60);
-  --label-3:   rgba(235,235,245,.32);
-  --label-4:   rgba(235,235,245,.18);
+  --label:     #f4f7fa;
+  --label-2:   rgba(214,226,238,.62);
+  --label-3:   rgba(214,226,238,.36);
+  --label-4:   rgba(214,226,238,.20);
 
   /* lines */
-  --sep:       rgba(84,84,88,.60);
-  --sep-op:    rgba(84,84,88,.34);   /* for edges sitting over blur */
+  --sep:       rgba(90,110,130,.55);
+  --sep-op:    rgba(90,110,130,.32);   /* for edges sitting over blur */
   --hair:      .5px;
 
   /* system palette (iOS dark values) */
@@ -41,10 +41,10 @@
   --yellow:#ffd60a; --teal:#40c8e0; --indigo:#5e5ce6; --pink:#ff375f;
   --purple:#bf5af2; --mint:#63e6e2; --brown:#ac8e68; --grey:#8e8e93;
 
-  /* accent (per-account, synced) */
-  --acc:  var(--green);
-  --acc-2:#248a3d;
-  --on-acc:#000000;
+  /* accent (per-account, synced) — PRO THEME: electric cyan-blue */
+  --acc:  #38bdf8;
+  --acc-2:#0369a1;
+  --on-acc:#04121c;
   --acc-soft: color-mix(in srgb, var(--acc) 16%, transparent);
   --acc-line: color-mix(in srgb, var(--acc) 38%, transparent);
 
@@ -62,29 +62,29 @@
 }
 
 :root[data-theme="light"] {
-  --bg:        #f2f2f7;
-  --bg-el:     #f7f7fa;
+  --bg:        #eef2f6;
+  --bg-el:     #f5f8fb;
   --surface:   #ffffff;
-  --surface-2: #ececef;
-  --surface-3: #e3e3e8;
+  --surface-2: #e4eaef;
+  --surface-3: #d7dfe6;
 
-  --label:     #000000;
-  --label-2:   rgba(60,60,67,.60);
-  --label-3:   rgba(60,60,67,.30);
-  --label-4:   rgba(60,60,67,.16);
+  --label:     #0c1720;
+  --label-2:   rgba(28,48,66,.62);
+  --label-3:   rgba(28,48,66,.34);
+  --label-4:   rgba(28,48,66,.18);
 
-  --sep:       rgba(60,60,67,.29);
-  --sep-op:    rgba(60,60,67,.20);
+  --sep:       rgba(70,95,120,.30);
+  --sep-op:    rgba(70,95,120,.20);
 
   --blue:#007aff; --green:#34c759; --red:#ff3b30; --orange:#ff9500;
   --yellow:#ffcc00; --teal:#30b0c7; --indigo:#5856d6; --pink:#ff2d55;
   --purple:#af52de; --mint:#00c7be; --brown:#a2845e; --grey:#8e8e93;
-  --acc-2:#248a3d;
+  --acc-2:#0369a1;
   --on-acc:#ffffff;
 }
 
 /* accents — Apple's system colours, so a recolour never looks off-system */
-:root[data-accent="lime"]  { --acc:var(--green);  --acc-2:#248a3d; --on-acc:#000 }
+:root[data-accent="lime"]  { --acc:#38bdf8;  --acc-2:#0369a1; --on-acc:#04121c }
 :root[data-accent="sky"]   { --acc:var(--blue);   --acc-2:#0060df; --on-acc:#fff }
 :root[data-accent="orange"]{ --acc:var(--orange); --acc-2:#c76b00; --on-acc:#000 }
 :root[data-accent="violet"]{ --acc:var(--purple); --acc-2:#8944ab; --on-acc:#fff }
@@ -931,4 +931,76 @@ h4.sec{
   #timer.rest .head{flex:1;min-width:0}
   .exmedia img{height:380px}
   .hm-wrap{display:flex;flex-direction:column;align-items:center}
+}
+
+/* ================================================================ */
+/* PRO THEME OVERLAY — professional polish on top of design tokens  */
+/* ================================================================ */
+
+/* soft ambient gradient behind the whole app */
+body {
+  background:
+    radial-gradient(1200px 500px at 50% -10%, color-mix(in srgb, var(--acc) 10%, transparent), transparent 60%),
+    var(--bg);
+}
+
+/* cards: subtle border + depth shadow instead of flat fill */
+.card, .surface {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.04) inset,
+    0 8px 24px rgba(2,6,12,.35);
+}
+:root[data-theme="light"] .card,
+:root[data-theme="light"] .surface {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.9) inset,
+    0 6px 18px rgba(30,50,70,.08);
+}
+
+/* primary buttons: vertical gradient + pressed depth */
+button.accbg, .btn-acc, .primary {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--acc) 92%, #fff),
+    var(--acc));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.25) inset,
+    0 4px 14px color-mix(in srgb, var(--acc) 35%, transparent);
+}
+button.accbg:active, .btn-acc:active { transform: scale(.98); filter: brightness(.95); }
+
+/* tab bar: glassy blur */
+#tabbar {
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+}
+
+/* exercise thumbs: rounded, bordered, hover zoom */
+.thumb {
+  border-radius: calc(var(--r-card) - 3px);
+  border: 1px solid var(--sep-op);
+  object-fit: cover;
+  transition: transform var(--med) var(--ease), box-shadow var(--med);
+  background: var(--surface-2);
+}
+@media (hover:hover) {
+  .thumb:hover { transform: scale(1.04); box-shadow: 0 6px 16px rgba(2,6,12,.4); }
+}
+
+/* big exercise media: framed like a studio shot */
+.exmedia img {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--sep-op);
+  box-shadow: 0 10px 30px rgba(2,6,12,.45);
+  background:
+    radial-gradient(circle at 50% 30%, var(--surface-2), var(--surface));
+}
+:root[data-theme="light"] .exmedia img { box-shadow: 0 10px 26px rgba(30,50,70,.15); }
+
+/* headings slightly tighter tracking = more premium */
+h1, h2 { letter-spacing: -.02em; }
+
+/* stat numbers pop */
+.bignum, .stat-n {
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--acc) 45%, transparent);
 }
